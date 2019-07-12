@@ -29,9 +29,7 @@
 * no more than `<%=schema.maxItems %>` items in the array
 <% } else if (schema.minItems!==undefined) { %>
 * at least `<%=schema.minItems %>` items in the array<% } %>
-<% } -%>
-
-<% if (schema.const!==undefined) { %>
+<% } -%><% if (schema.const!==undefined) { %>
 The value of this property **must** be equal to:
 
 
@@ -41,28 +39,23 @@ The value of this property **must** be equal to:
 
 <% } else if (schema.enum!==undefined) { %>
 The value of this property **must** be equal to one of the [known values below](#<%=nameSlug %>-known-values).
-<% } else { %>
-
-### <%=name %> Type
-
-<% if (schema.type==="string") { %>
-<%- include("string-type",{schema:schema,_:_}) %>
+<% } else { %><% if (schema.type==="string") { %>
+<%- include("string-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="number"||schema.type==="integer") { %>
-<%- include("number-type",{schema:schema,_:_}) %>
+<%- include("number-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="null") { %>
-<%- include("null-type",{schema:schema,_:_}) %>
+<%- include("null-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="boolean") { %>
-<%- include("boolean-type",{schema:schema,_:_}) %>
+<%- include("boolean-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="object") { %>
-<%- include("object-type",{schema:schema,_:_,nameSlug:nameSlug}) %>
-<% } else if (schema.type==="array") { %>
-<%- include("array-type",{schema:schema,_:_,nested:false,ejs:ejs}) %>
+<%- include("object-type",{schema:schema,_:_,nameSlug:nameSlug}).replace(/^/gm, '  ') %>
+<% } else if (schema.type==="array") { %><%- include("array-type",{schema:schema,_:_,nested:false,ejs:ejs}).replace(/^/gm, '  ') %>
 <% } else if (schema.$ref!==undefined) { %>
-<%- include("referenced-type",{schema:schema,_:_}) %>
+<%- include("referenced-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.anyOf!==undefined || schema.allOf!==undefined || schema.oneOf!==undefined) { %>
-<%- include("join-type",{schema:schema,_:_,schemas:schema.anyOf || schema.allOf || schema.oneOf,ejs:ejs}) %>
+<%- include("join-type",{schema:schema,_:_,schemas:schema.anyOf || schema.allOf || schema.oneOf,ejs:ejs}).replace(/^/gm, '  ') %>
 <% } else if (schema.simpletype==="multiple") { %>
-<%- include("multiple-type",{schema:schema,_:_}) %>
+<%- include("multiple-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else { %>
 Unknown type `<%= schema.type %>`.
 
@@ -74,12 +67,10 @@ Unknown type `<%= schema.type %>`.
 <% }} %>
 
 <% if (schema.enum!==undefined||schema["meta:enum"]!==undefined) { %>
-### <%=name %> Known Values
-
-| Value | Description |
-|-------|-------------|
+  | Value | Description |
+  |-------|-------------|
 <%  _.forIn(schema["meta:enum"], (value, key, object) => { %>
-| `<%= key %>` | <%= value %> |
+  | `<%= key %>` | <%= value %> |
 <% }); %>
 
 <% } %>

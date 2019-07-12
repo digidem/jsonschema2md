@@ -5,19 +5,17 @@
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
  */ %>
 
-#### <%=name %>
+#### `<%=name %>`
 
 <% if (schema.title) { %>
 ##### <%= schema.title %>
 
 <% } %>
-    
+
 <% if (schema.description) { %>
 <%- (""+schema.description).replace(/\n/g, '\n\n') %>
 <% } %>
 
-
-`<%=name %>`
 
 
 * is <% if (required) { %>**required**<% } else { %>optional<% } %>
@@ -41,22 +39,20 @@ The value of this property **must** be equal to:
 The value of this property **must** be equal to one of the [known values below](#<%=nameSlug %>-known-values).
 <% } else { %>
 
-##### <%=name %> Type
-
 <% if (schema.type==="string") { %>
-<%- include("string-type",{schema:schema,_:_}) %>
+<%- include("string-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="number"||schema.type==="integer") { %>
-<%- include("number-type",{schema:schema,_:_}) %>
+<%- include("number-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="boolean") { %>
-<%- include("boolean-type",{schema:schema,_:_}) %>
+<%- include("boolean-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.type==="object") { %>
-<%- include("object-type",{schema:schema,_:_})  %>
+<%- include("object-type",{schema:schema,_:_}).replace(/^/gm, '  ')  %>
 <% } else if (schema.type==="array") { %>
-<%- include("array-type",{schema:schema,_:_,nested:false,ejs:ejs}) %>
+<%- include("array-type",{schema:schema,_:_,nested:false,ejs:ejs}).replace(/^/gm, '  ') %>
 <% } else if (schema.$ref!==undefined) { %>
-<%- include("referenced-type",{schema:schema,_:_}) %>
+<%- include("referenced-type",{schema:schema,_:_}).replace(/^/gm, '  ') %>
 <% } else if (schema.anyOf!==undefined || schema.allOf!==undefined || schema.oneOf!==undefined) { %>
-<%- include("join-type",{schema:schema,_:_,schemas:schema.anyOf || schema.allOf || schema.oneOf,ejs:ejs}) %>
+<%- include("join-type",{schema:schema,_:_,schemas:schema.anyOf || schema.allOf || schema.oneOf,ejs:ejs}).replace(/^/gm, '  ') %>
 <% } else { %>
 Unknown type `<%= schema.type %>`.
 
@@ -96,4 +92,3 @@ Unknown type `<%= schema.type %>`.
 
 <% }); %>
 <% } %>
-

@@ -6,6 +6,13 @@
  */ %>
 # Properties
 
+<% function githubSlugify(val) {
+	return val.toLowerCase().replace(/ /g,'-')
+		// single chars that are removed
+		.replace(/[`~!@#$%^&*()+=<>?,./:;"'|{}\[\]\\–—]/g, '')
+		// CJK punctuations that are removed
+		.replace(/[　。？！，、；：“”【】（）〔〕［］﹃﹄“”‘’﹁﹂—…－～《》〈〉「」]/g, '')
+} %>
 <% const hasDefault = _.keys(props).filter(property => _.has(props, property + '.default')).length > 0; %>
 <% const hasDefinition = _.keys(props).filter(property => _.has(props, property + '.$oSchema')).length > 0; %>
 
@@ -22,7 +29,7 @@
 });
 %><% _.keys(pprops).forEach(property => {
   const schema = pprops[property]; %>
-| `<%= property.replace(':', '') %>` | <%= schema.simpletype %> | Pattern | <%= schema.nullable === true ? "Yes" : "No" %> |<% if(hasDefault) { %> <% if (schema.default!==undefined) { %>`<%- JSON.stringify(schema.default) %>`<% } %> |<% } %> <% if(hasDefinition) { %> <%
+| [`<%= property %>`](#pattern-<%= githubSlugify(property) %>) | <%= schema.simpletype %> | Pattern | <%= schema.nullable === true ? "Yes" : "No" %> |<% if(hasDefault) { %> <% if (schema.default!==undefined) { %>`<%- JSON.stringify(schema.default) %>`<% } %> |<% } %> <% if(hasDefinition) { %> <%
     if (schema.$oSchema) {
       %>[<%= schema.$oSchema.$linkVal %>](<%= schema.$oSchema.$linkPath %>#<%= property.replace(':', '').toLowerCase() %>)<%
     } else {

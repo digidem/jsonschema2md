@@ -1,7 +1,7 @@
 {
   "name": "@digidem/jsonschema2md",
   "description": "Validate and document complex JSON Schemas the easy way.",
-  "version": "1.1.1",
+  "version": "3.0.0",
   "main": "lib/main.js",
   "bin": {
     "jsonschema2md": "./cli.js"

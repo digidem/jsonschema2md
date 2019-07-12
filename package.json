@@ -51,10 +51,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adobe/jsonschema2md.git"
+    "url": "git@github.com:digidem/jsonschema2md.git"
   },
   "bugs": {
-    "url": "https://github.com/adobe/jsonschema2md/issues"
+    "url": "https://github.com/digidem/jsonschema2md/issues"
   },
   "license": "Apache-2.0",
   "author": "",

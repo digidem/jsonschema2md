@@ -5,7 +5,7 @@
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
  */ %>
 
-## <%=name %>
+## `<%=name %>`
 
 <% if (schema.title) { %>
 ### <%= schema.title %>
@@ -16,10 +16,12 @@
 <%- schema.description.replace(/\n/g, '\n\n') %>
 <% } %>
 
-`<%=name %>`
-
 
 * is <% if (required) { %>**required**<% } else { %>optional<% } %>
+<% if (schema.default!==undefined) { %>
+* default: `<%- JSON.stringify(schema.default) %>`
+<% } -%>
+<% if (schema.$oSchema) { %>* defined in [<%= schema.$oSchema.$linkVal %>](<%= schema.$oSchema.$linkPath %>#<%= nameSlug %>)<% } %>
 * type: <%=schema.simpletype %><% if (schema.simpletype.match(/\[\]\[\]/)||schema.simpletype==="`array[]`") { %> (nested array)<% } %>
 <% if (schema.type==='array') { %><% if (schema.maxItems!==undefined&&schema.minItems!==undefined) { %>
 * between `<%=schema.minItems %>` and `<%=schema.maxItems %>` items in the array
@@ -28,10 +30,6 @@
 <% } else if (schema.minItems!==undefined) { %>
 * at least `<%=schema.minItems %>` items in the array<% } %>
 <% } -%>
-<% if (schema.default!==undefined) { %>
-* default: `<%- JSON.stringify(schema.default) %>`
-<% } -%>
-* defined in <% if (schema.$oSchema) { %>[<%= schema.$oSchema.$linkVal %>](<%= schema.$oSchema.$linkPath %>#<%= nameSlug %>)<% } else { %>this schema<% } %>
 
 <% if (schema.const!==undefined) { %>
 The value of this property **must** be equal to:
@@ -104,4 +102,3 @@ Unknown type `<%= schema.type %>`.
 
 <% }); %>
 <% } %>
-

@@ -23,6 +23,7 @@
 #### Condition <%= i+1 %>
 <% } %>
 
+<% if (schemas[i].type!=="object") { %>type: `<%= schemas[i].type %>`<% } %>
 <% if (schemas[i].type==="string") { %>
 <%- include("string-type",{schema:schemas[i],_:_}) %>
 <% } else if (schemas[i].type==="number"||schemas[i].type==="integer") { %>

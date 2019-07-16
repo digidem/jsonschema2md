@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/digidem/jsonschema2md/compare/v2.1.1...v3.1.0) (2019-07-16)
+
+
+### Bug Fixes
+
+* don't repeat boolean type ([fbd576d](https://github.com/digidem/jsonschema2md/commit/fbd576d))
+* show types in allOf types ([274b11c](https://github.com/digidem/jsonschema2md/commit/274b11c))
+
+
+### Features
+
+* remove defined by from property table if not used ([9c6418c](https://github.com/digidem/jsonschema2md/commit/9c6418c))
+* remove defined-in if not used ([f98e51a](https://github.com/digidem/jsonschema2md/commit/f98e51a))
+* remove id and table from schema header ([8042b89](https://github.com/digidem/jsonschema2md/commit/8042b89))
+* remove table and header from readme ([cdf8538](https://github.com/digidem/jsonschema2md/commit/cdf8538))
+* simplify property formating ([6dc360d](https://github.com/digidem/jsonschema2md/commit/6dc360d))
+
+
+
 ## [3.0.0](https://github.com/digidem/jsonschema2md/compare/v2.1.1...v3.0.0) (2019-07-12)
 
 
